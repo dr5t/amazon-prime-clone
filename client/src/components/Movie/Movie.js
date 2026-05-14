@@ -3,6 +3,7 @@ import React,{useEffect, useState,useContext} from 'react';
 // api import
 import API_KEY from '../../APIS/tmdbapikey'
 import axios from 'axios';
+import API_BASE_URL from '../../../config'
 // normal import
 import MainNav from '../MainNav/MainNav'
 import Row from '../Rows/Row'
@@ -36,7 +37,7 @@ let toget_related_movies;
 
 const Watch = (props)=>{
 
-    const [] = useContext(UserInfoContext);
+    const [userId] = useContext(UserInfoContext);
     const [watchDetails, setWatchDetails] = useState({});
     
     const [watchCredits, setWatchCredits] = useState({});
@@ -223,8 +224,8 @@ const Watch = (props)=>{
         if(sessionStorage.getItem('Guest'))
             return alert('This service not available for Guest')
         // console.log('id',movieId);
-        axios.put(`https://myprimecloneserver.herokuapp.com/watchlist`,{
-            userId:sessionStorage.getItem('_id'),
+        axios.put(`${API_BASE_URL}/watchlist`,{
+            userId : userId,
             media : 'movie',
             mediaId : props.match.params.id,
             imgUrl: watchDetails.backdrop_path

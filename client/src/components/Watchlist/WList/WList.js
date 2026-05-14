@@ -3,6 +3,8 @@ import {Link,useHistory} from 'react-router-dom';
 
 // image url imports
 import axios from 'axios'
+import API_BASE_URL from '../../../config'
+import Loading from '../../Loading/Loading'
 let img_url_start = "https://image.tmdb.org/t/p/original/";
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import img_not_found from '../../../assets/images/img_not_found.png'
@@ -27,7 +29,8 @@ const WList=(props)=>{
         async function fetchData(){
 
             // ${props.mediaType}
-            let request = await axios.get(`https://myprimecloneserver.herokuapp.com/watchlist/${mediaType}/${userId}`)
+            try{
+            let request = await axios.get(`${API_BASE_URL}/watchlist/${mediaType}/${userId}`)
 
                 if(request.data){
                     // console.log(`For ${props.mediaType} data `,request.data)
