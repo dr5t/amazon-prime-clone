@@ -99,3 +99,7 @@ label {
     }
   }
 }
+
+.form-logo-container {
+  @include formLogo;
+}
